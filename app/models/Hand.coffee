@@ -6,19 +6,32 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
-    console.log(@scores()[0])
     if @scores()[0] > 21 then @bust()
   bust: ->
     @trigger 'bust'
-    console.log('bust')
     @trigger 'resetMe'
   reveal: ->
     @each (card) ->
       card.set('revealed', true)
   add17: ->
-    while @scores()[0] < 17
-      @hit()
-    if @scores()[0] < 22 then @trigger('compare')
+    if @scores().length == 2
+      if 21 > @scores()[1] > 16 then @trigger('compare')
+      else if @scores()[1] > 21
+        while @scores()[0] < 16
+          @add(@deck.pop()).last()
+        if @scores()[0] > 21
+          @bust()
+        else @trigger('compare')
+      else
+        @add(@deck.pop()).last()
+        @add17()
+    else
+      if @scores()[0] < 17
+        @add(@deck.pop()).last()
+        @add17()
+      else
+        if @scores()[0] < 22 then @trigger('compare')
+        else @bust()
   stand: ->
     @trigger 'stand'
   checkNumber: ->

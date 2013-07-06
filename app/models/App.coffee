@@ -12,7 +12,8 @@ class window.App extends Backbone.Model
     @get('dealerHand').on 'bust', =>
       alert 'Dealer Busts!'
     @get('dealerHand').on 'compare', =>
-      if @get('dealerHand').scores()[0] > @get('playerHand').scores()[0] then alert 'Dealer Wins'
+      if @checknumber(@get('dealerHand').scores()) > @checknumber(@get('playerHand').scores())
+        alert 'Dealer Wins'
       else alert 'Player Wins'
       @initialize()
       @trigger 'resetDeck'
@@ -22,4 +23,10 @@ class window.App extends Backbone.Model
     @get('dealerHand').on 'resetMe', =>
       @initialize()
       @trigger 'resetDeck'
+
+  checknumber: (scores)->
+    if scores[1] < 22
+      return scores[1]
+    else
+      return scores[0]
 
