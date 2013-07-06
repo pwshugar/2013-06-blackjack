@@ -15,13 +15,13 @@ class window.Hand extends Backbone.Collection
       card.set('revealed', true)
   add17: ->
     if @scores().length == 2
-      if 21 > @scores()[1] > 16 then @trigger('compare')
+      if 21 > @scores()[1] > 16 then @compare()
       else if @scores()[1] > 21
         while @scores()[0] < 16
           @add(@deck.pop()).last()
         if @scores()[0] > 21
           @bust()
-        else @trigger('compare')
+        else @compare()
       else
         @add(@deck.pop()).last()
         @add17()
@@ -30,8 +30,10 @@ class window.Hand extends Backbone.Collection
         @add(@deck.pop()).last()
         @add17()
       else
-        if @scores()[0] < 22 then @trigger('compare')
+        if @scores()[0] < 22 then @compare()
         else @bust()
+  compare: ->
+    @trigger 'compare'
   stand: ->
     @trigger 'stand'
   checkNumber: ->
