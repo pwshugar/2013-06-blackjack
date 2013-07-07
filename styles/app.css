@@ -1,14 +1,35 @@
+body {
+  background-color: #8DE28D;
+}
+
+button {
+  font-size: 16px;
+  border-radius: 5px;
+  background: brown;
+  color:beige;
+}
+
 .card {
   float: left;
   border: solid 1px black;
-  width: 100px;
+  width: 105px;
   border-radius: 5px;
-  height: 140px;
+  height: 175px;
   margin-right: 20px;
+  background-color: beige;
+  font-size: 22px;
+  text-align: center;
+  padding-right:10px;
+  padding-left:10px;
+}
+
+.card p {
+  margin-top: 15%;
 }
 
 .covered {
-  background-color: black;
+  background-color: #0052CC;
+  color: #0052CC;
 }
 
 .hand {
